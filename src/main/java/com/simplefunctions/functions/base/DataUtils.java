@@ -25,7 +25,7 @@ public class DataUtils {
         }
     }
 
-    public static Object getDataAtIndex(IFunction input, int index) {
+    public static Object getDataAtIndex(IEvaluable input, int index) {
         final Object eval = input.eval();
 
         if (eval instanceof ParamList) {

@@ -21,5 +21,7 @@ public class TestOne {
         tr.runTest(new SplitStringNoDuplicates());
         tr.runTest(new SplitStringLimit());
         tr.runTest(new SplitAndAddString());
+        tr.runTest(new IfIntGtTest());
+
     }
 }

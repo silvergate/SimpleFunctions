@@ -33,4 +33,10 @@ public class Function implements IFunction {
     public IFunctionType getType() {
         return this.functionType;
     }
+
+    @Override
+    public String toString() {
+        return "Function{" +
+                "eval=" + eval() + '}';
+    }
 }

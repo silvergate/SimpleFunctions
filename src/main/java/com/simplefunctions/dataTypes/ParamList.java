@@ -2,6 +2,8 @@ package com.simplefunctions.dataTypes;
 
 import com.simplefunctions.base.IEvaluable;
 
+import java.util.Arrays;
+
 /**
  * Buran.
  *
@@ -16,5 +18,12 @@ public class ParamList {
 
     public IEvaluable[] getFunctions() {
         return functions;
+    }
+
+    @Override
+    public String toString() {
+        return "ParamList{" +
+                "functions=" + Arrays.toString(functions) +
+                '}';
     }
 }

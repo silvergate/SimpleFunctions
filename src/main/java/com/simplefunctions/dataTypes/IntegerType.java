@@ -32,6 +32,28 @@ public class IntegerType extends DataType {
         return (this.minValue <= number) && (this.maxValue >= number);
     }
 
+    public boolean isStrictlyGreaterThan(IntegerType type) {
+        return getMinValue() > type.getMaxValue();
+    }
+
+    public boolean isStrictlyLesserThan(IntegerType type) {
+        return getMaxValue() < type.getMinValue();
+    }
+
+    public boolean intersect(IntegerType type) {
+        if (isStrictlyGreaterThan(type)) {
+            return false;
+        }
+        if (isStrictlyLesserThan(type)) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isFixRange() {
+        return (this.maxValue == this.minValue);
+    }
+
     @Override
     public boolean isValid(Object data) {
         if (!isTypeNotNull(data, Number.class)) {

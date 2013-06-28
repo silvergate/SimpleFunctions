@@ -2,6 +2,7 @@ package com.simplefunctions.functions.collection;
 
 import com.simplefunctions.base.*;
 import com.simplefunctions.dataTypes.CollectionType;
+import com.simplefunctions.dataTypes.FilterMark;
 import com.simplefunctions.functions.base.EvalMethod;
 import com.simplefunctions.functions.base.FunctionTypeBase;
 import com.simplefunctions.functions.base.MetricsMethod;
@@ -40,6 +41,9 @@ public class FunColEach extends FunctionTypeBase {
         final FunctionMetrics singleMetrics = this.functionType.calcMetrics(element);
         final Complexity singleComplexity = singleMetrics.getComplexity();
 
+        //TODO: Berücksichtigen von FilterMark (falls das vorhanden ist,
+        //ändern sich max und min elements).
+
         final Complexity combinedComplexity = singleComplexity.multiply(col.getMaxElements());
         final CollectionType finalCollectionType =
                 new CollectionType(!this.uniqueResults, this.uniqueResults, col.getMinElements(),
@@ -56,14 +60,16 @@ public class FunColEach extends FunctionTypeBase {
             result = new ArrayList<>();
         }
         for (final Object element : inCol) {
-            final Object elemResult = this.functionType.eval(new IEvaluable() {
-                @Override
-                public Object eval() {
-                    return element;
-                }
+            if (!FilterMark.SINGLETON.equals(element)) {
+                final Object elemResult = this.functionType.eval(new IEvaluable() {
+                    @Override
+                    public Object eval() {
+                        return element;
+                    }
 
-            });
-            result.add(elemResult);
+                });
+                result.add(elemResult);
+            }
         }
         return result;
     }

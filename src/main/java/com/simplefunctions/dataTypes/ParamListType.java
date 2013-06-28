@@ -2,6 +2,8 @@ package com.simplefunctions.dataTypes;
 
 import com.simplefunctions.base.IDataType;
 
+import java.util.Arrays;
+
 /**
  * Buran.
  *
@@ -31,5 +33,12 @@ public class ParamListType extends DataType {
     public boolean isValid(Object data) {
         //TODO:
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "ParamListType{" +
+                "types=" + Arrays.toString(types) +
+                '}';
     }
 }
