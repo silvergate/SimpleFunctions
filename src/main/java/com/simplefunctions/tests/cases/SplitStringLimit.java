@@ -3,7 +3,7 @@ package com.simplefunctions.tests.cases;
 import com.simplefunctions.base.IFunction;
 import com.simplefunctions.functions.literals.FunInt;
 import com.simplefunctions.functions.literals.FunString;
-import com.simplefunctions.functions.string.FunStringSplit;
+import com.simplefunctions.functions.string.FunStrSplit;
 import com.simplefunctions.tests.TestCase;
 
 import java.io.UnsupportedEncodingException;
@@ -34,7 +34,7 @@ public class SplitStringLimit extends TestCase {
 
     @Override
     public IFunction createFunction() {
-        return FunStringSplit.cLimit(SPLIT_CHAR, FunString.c(STR1), FunInt.c(LIMIT));
+        return FunStrSplit.cLimit(SPLIT_CHAR, FunString.c(STR1), FunInt.c(LIMIT));
     }
 
     @Override

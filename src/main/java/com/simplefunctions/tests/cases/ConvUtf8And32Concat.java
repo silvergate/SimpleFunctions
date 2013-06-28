@@ -4,7 +4,7 @@ import com.simplefunctions.base.IFunction;
 import com.simplefunctions.dataTypes.Binary;
 import com.simplefunctions.functions.bit.FunBitConcat;
 import com.simplefunctions.functions.literals.FunString;
-import com.simplefunctions.functions.string.FunStringToBinary;
+import com.simplefunctions.functions.string.FunStrToBinary;
 import com.simplefunctions.tests.TestCase;
 
 import java.io.UnsupportedEncodingException;
@@ -26,8 +26,8 @@ public class ConvUtf8And32Concat extends TestCase {
 
     @Override
     public IFunction createFunction() {
-        IFunction toUtf8 = FunStringToBinary.cUtf8(FunString.c(STR1));
-        IFunction toUtf32 = FunStringToBinary.cUtf32Be(FunString.c(STR2));
+        IFunction toUtf8 = FunStrToBinary.cUtf8(FunString.c(STR1));
+        IFunction toUtf32 = FunStrToBinary.cUtf32Be(FunString.c(STR2));
         return FunBitConcat.c(toUtf8, toUtf32);
     }
 

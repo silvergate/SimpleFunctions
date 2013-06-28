@@ -6,6 +6,7 @@ import com.simplefunctions.dataTypes.Binary;
 import com.simplefunctions.functions.collection.FunColEach;
 import com.simplefunctions.functions.common.FunChain;
 import com.simplefunctions.functions.common.FunPrepared;
+import com.simplefunctions.functions.literals.FunFunTt;
 import com.simplefunctions.functions.literals.FunString;
 import com.simplefunctions.functions.string.*;
 import com.simplefunctions.tests.TestCase;
@@ -34,11 +35,12 @@ public class SplitAndAddString extends TestCase {
     @Override
     public IFunction createFunction() {
         IFunctionType addTextInFrontFunction =
-                FunPrepared.build(FunStrConcat.SINGLETON).fun(FunString.c(STR2)).inner().get();
+                FunPrepared.build(FunStrConcat.SINGLETON).fun(FunString.c(STR2)).fromOuter().get();
         IFunctionType chainedLoopFunction =
-                FunChain.c(addTextInFrontFunction, FunStringTrim.SINGLETON,
-                        FunStringLower.SINGLETON, FunStringToBinary.UTF8);
-        return FunColEach.c(chainedLoopFunction, FunStringSplit.c(SPLIT_CHAR, FunString.c(STR1)));
+                FunChain.c(addTextInFrontFunction, FunStrTrim.SINGLETON, FunStrLower.SINGLETON,
+                        FunStrToBinary.UTF8);
+        return FunColEach
+                .c(FunStrSplit.c(SPLIT_CHAR, FunString.c(STR1)), FunFunTt.c(chainedLoopFunction));
     }
 
     @Override

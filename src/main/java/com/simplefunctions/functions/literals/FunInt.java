@@ -21,6 +21,14 @@ public class FunInt extends FunctionTypeBase {
         return new Function(new FunInt(value), FunVoid.FUN);
     }
 
+    public static IFunction[] fromArray(long... values) {
+        final IFunction[] results = new IFunction[values.length];
+        for (int i = 0; i < values.length; i++) {
+            results[i] = c(values[i]);
+        }
+        return results;
+    }
+
     public FunInt(long value) {
         this.value = value;
     }

@@ -18,4 +18,15 @@ public abstract class DataType implements IDataType {
     protected <T extends Object> T getData(Object data, Class<?> clazz) {
         return (T) data;
     }
+
+    @Override
+    public IDataType combine(IDataType type) {
+        if (type.getClass().equals(getClass())) {
+            return combineSameType(type);
+        } else {
+            return AltType.combine(this, type);
+        }
+    }
+
+    protected abstract IDataType combineSameType(IDataType type);
 }

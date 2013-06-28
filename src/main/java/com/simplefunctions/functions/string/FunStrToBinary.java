@@ -18,19 +18,19 @@ import java.io.UnsupportedEncodingException;
  *
  * @author: ${USER} Date: 24.06.13 Time: 02:17
  */
-public class FunStringToBinary extends FunctionTypeBase {
+public class FunStrToBinary extends FunctionTypeBase {
 
     private final UtfType utfType;
 
-    private FunStringToBinary(UtfType utfType) {
+    private FunStrToBinary(UtfType utfType) {
         this.utfType = utfType;
     }
 
-    public static final FunStringToBinary UTF8 = new FunStringToBinary(UtfType.utf8);
-    public static final FunStringToBinary UTF16BE = new FunStringToBinary(UtfType.utf16be);
-    public static final FunStringToBinary UTF16LE = new FunStringToBinary(UtfType.utf16le);
-    public static final FunStringToBinary UTF32BE = new FunStringToBinary(UtfType.utf32be);
-    public static final FunStringToBinary UTF32LE = new FunStringToBinary(UtfType.utf32le);
+    public static final FunStrToBinary UTF8 = new FunStrToBinary(UtfType.utf8);
+    public static final FunStrToBinary UTF16BE = new FunStrToBinary(UtfType.utf16be);
+    public static final FunStrToBinary UTF16LE = new FunStrToBinary(UtfType.utf16le);
+    public static final FunStrToBinary UTF32BE = new FunStrToBinary(UtfType.utf32be);
+    public static final FunStrToBinary UTF32LE = new FunStrToBinary(UtfType.utf32le);
 
     public static IFunction cUtf8(IFunction int1) {
         return new Function(UTF8, int1);

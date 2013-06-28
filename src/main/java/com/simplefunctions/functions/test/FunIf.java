@@ -36,7 +36,7 @@ public class FunIf implements IFunctionType {
                 type = trueFun;
                 break;
             case trueOrFalse:
-                type = new AltType(trueFun, falseFun);
+                type = AltType.combine(trueFun, falseFun);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown boolean range");

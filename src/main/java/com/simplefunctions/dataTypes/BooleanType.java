@@ -1,5 +1,7 @@
 package com.simplefunctions.dataTypes;
 
+import com.simplefunctions.base.IDataType;
+
 /**
  * Buran.
  *
@@ -63,5 +65,25 @@ public class BooleanType extends DataType {
         return "BooleanType{" +
                 "range=" + range +
                 '}';
+    }
+
+    @Override
+    protected IDataType combineSameType(IDataType type) {
+        final BoolRange otherRange = ((BooleanType) type).getRange();
+        final BoolRange thisRange = getRange();
+
+        boolean canBeTrue;
+        boolean canBeFalse;
+        boolean canBeBoth;
+        canBeTrue = (otherRange == BoolRange.trueOnly) || (thisRange == BoolRange.trueOnly);
+        canBeBoth = (otherRange == BoolRange.trueOrFalse) || (thisRange == BoolRange.trueOrFalse);
+        canBeFalse = (otherRange == BoolRange.falseOnly) || (thisRange == BoolRange.falseOnly);
+
+        final BoolRange newRange;
+        if (canBeTrue && (!canBeBoth) && (!canBeFalse)) newRange = BoolRange.trueOnly;
+        else if (canBeFalse && (!canBeBoth) && (!canBeTrue)) newRange = BoolRange.falseOnly;
+        else newRange = BoolRange.trueOrFalse;
+
+        return new BooleanType(newRange);
     }
 }

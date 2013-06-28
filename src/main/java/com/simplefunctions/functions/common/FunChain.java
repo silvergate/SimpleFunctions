@@ -31,6 +31,7 @@ public class FunChain implements IFunctionType {
 
         for (final IFunctionType funType : this.functionTypes) {
             curMetrics = funType.calcMetrics(cutDataType);
+            cutDataType = curMetrics.getOutputType();
             curComplexity = curComplexity.combine(curMetrics.getComplexity());
         }
 

@@ -82,7 +82,7 @@ public class CollectionType extends DataType {
             if (!(element instanceof IFunction)) {
                 return false;
             }
-            if (!this.elementType.isValid((IFunction) ((IFunction) element).eval())) {
+            if (!this.elementType.isValid(((IFunction) element).eval())) {
                 return false;
             }
         }
@@ -98,5 +98,20 @@ public class CollectionType extends DataType {
                 ", maxElements=" + maxElements +
                 ", elementType=" + elementType +
                 '}';
+    }
+
+    @Override
+    protected IDataType combineSameType(IDataType type) {
+        CollectionType ct = (CollectionType) type;
+        if (ct.getElementType().getClass().equals(getElementType().getClass()) &&
+                (ct.isUnique() == isUnique()) && (ct.isOrdered() == isOrdered())) {
+            /* Combine only collections with same element types, unique and ordered */
+            final IDataType newElementType = AltType.combine(ct.getElementType(), getElementType());
+            return new CollectionType(isOrdered(), isUnique(),
+                    Math.min(ct.getMinElements(), getMinElements()),
+                    Math.max(getMaxElements(), getMaxElements()), newElementType);
+        } else {
+            return new AltType(this, type);
+        }
     }
 }

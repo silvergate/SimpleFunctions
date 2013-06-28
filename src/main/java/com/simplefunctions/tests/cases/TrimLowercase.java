@@ -2,9 +2,9 @@ package com.simplefunctions.tests.cases;
 
 import com.simplefunctions.base.IFunction;
 import com.simplefunctions.functions.literals.FunString;
-import com.simplefunctions.functions.string.FunStringLower;
-import com.simplefunctions.functions.string.FunStringTrim;
-import com.simplefunctions.functions.string.FunStringUpper;
+import com.simplefunctions.functions.string.FunStrLower;
+import com.simplefunctions.functions.string.FunStrTrim;
+import com.simplefunctions.functions.string.FunStrUpper;
 import com.simplefunctions.tests.TestCase;
 
 import java.util.Locale;
@@ -33,8 +33,8 @@ public class TrimLowercase extends TestCase {
 
     @Override
     public IFunction createFunction() {
-        return FunStringUpper
-                .c(FunStringTrim.c(FunStringLower.c(FunString.c(TEST_STR), FunString.c(LANG_TAG))),
+        return FunStrUpper
+                .c(FunStrTrim.c(FunStrLower.c(FunString.c(TEST_STR), FunString.c(LANG_TAG))),
                         FunString.c(LANG_TAG));
     }
 

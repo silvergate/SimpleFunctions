@@ -13,13 +13,13 @@ import java.util.Locale;
  *
  * @author: ${USER} Date: 23.06.13 Time: 14:28
  */
-public class FunStringLower extends FunctionTypeBase {
+public class FunStrLower extends FunctionTypeBase {
 
     public static final Locale DEFAULT_LOCALE = Locale.US;
 
-    public static FunStringLower SINGLETON = new FunStringLower();
+    public static FunStrLower SINGLETON = new FunStrLower();
 
-    private FunStringLower() {
+    private FunStrLower() {
     }
 
     public static IFunction c(IFunction string, /* IETF BCP 47 */ IFunction locale) {

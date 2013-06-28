@@ -1,5 +1,7 @@
 package com.simplefunctions.dataTypes;
 
+import com.simplefunctions.base.IDataType;
+
 /**
  * Buran.
  *
@@ -90,5 +92,12 @@ public class IntegerType extends DataType {
                 "maxValue=" + maxValue +
                 ", minValue=" + minValue +
                 '}';
+    }
+
+    @Override
+    protected IDataType combineSameType(IDataType type) {
+        final IntegerType cast = (IntegerType) type;
+        return new IntegerType(Math.min(getMinValue(), cast.getMinValue()),
+                Math.max(getMaxValue(), cast.getMaxValue()));
     }
 }

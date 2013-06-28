@@ -1,5 +1,7 @@
 package com.simplefunctions.dataTypes;
 
+import com.simplefunctions.base.IDataType;
+
 /**
  * Buran.
  *
@@ -20,5 +22,10 @@ public class VoidType extends DataType {
     @Override
     public String toString() {
         return "VoidType{}";
+    }
+
+    @Override
+    protected IDataType combineSameType(IDataType type) {
+        return SINGLETON;
     }
 }

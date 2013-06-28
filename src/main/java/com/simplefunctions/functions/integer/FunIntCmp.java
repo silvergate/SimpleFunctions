@@ -16,15 +16,15 @@ import com.simplefunctions.functions.literals.FunList;
  *
  * @author: ${USER} Date: 24.06.13 Time: 02:17
  */
-public class FunIntTest extends FunctionTypeBase {
+public class FunIntCmp extends FunctionTypeBase {
 
     private final IntTest testOp;
 
-    public static final FunIntTest EQ = new FunIntTest(IntTest.eq);
-    public static final FunIntTest LE = new FunIntTest(IntTest.le);
-    public static final FunIntTest GT = new FunIntTest(IntTest.gt);
+    public static final FunIntCmp EQ = new FunIntCmp(IntTest.eq);
+    public static final FunIntCmp LE = new FunIntCmp(IntTest.le);
+    public static final FunIntCmp GT = new FunIntCmp(IntTest.gt);
 
-    private FunIntTest(IntTest op) {
+    private FunIntCmp(IntTest op) {
         this.testOp = op;
     }
 

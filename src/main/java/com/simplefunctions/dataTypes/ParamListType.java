@@ -41,4 +41,9 @@ public class ParamListType extends DataType {
                 "types=" + Arrays.toString(types) +
                 '}';
     }
+
+    @Override
+    protected IDataType combineSameType(IDataType type) {
+        return new AltType(this, type);
+    }
 }

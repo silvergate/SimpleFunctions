@@ -3,8 +3,9 @@ package com.simplefunctions.tests.cases;
 import com.simplefunctions.base.IFunction;
 import com.simplefunctions.functions.collection.FunColEach;
 import com.simplefunctions.functions.common.FunNil;
+import com.simplefunctions.functions.literals.FunFunTt;
 import com.simplefunctions.functions.literals.FunString;
-import com.simplefunctions.functions.string.FunStringSplit;
+import com.simplefunctions.functions.string.FunStrSplit;
 import com.simplefunctions.tests.TestCase;
 
 import java.io.UnsupportedEncodingException;
@@ -29,7 +30,8 @@ public class SplitStringNoDuplicates extends TestCase {
 
     @Override
     public IFunction createFunction() {
-        return FunColEach.unique(FunNil.SINGLETON, FunStringSplit.c(SPLIT_CHAR, FunString.c(STR1)));
+        return FunColEach
+                .unique(FunStrSplit.c(SPLIT_CHAR, FunString.c(STR1)), FunFunTt.c(FunNil.SINGLETON));
     }
 
     @Override

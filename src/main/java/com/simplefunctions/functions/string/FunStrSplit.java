@@ -15,19 +15,19 @@ import java.util.Arrays;
  *
  * @author: ${USER} Date: 23.06.13 Time: 14:28
  */
-public class FunStringSplit extends FunctionTypeBase {
+public class FunStrSplit extends FunctionTypeBase {
 
     private final char splitChar;
 
     public static IFunction c(char splitChar, IFunction input) {
-        return new Function(new FunStringSplit(splitChar), input);
+        return new Function(new FunStrSplit(splitChar), input);
     }
 
     public static IFunction cLimit(char splitChar, IFunction input, IFunction limit) {
-        return new Function(new FunStringSplit(splitChar), FunList.c(input, limit));
+        return new Function(new FunStrSplit(splitChar), FunList.c(input, limit));
     }
 
-    private FunStringSplit(char splitChar) {
+    private FunStrSplit(char splitChar) {
         this.splitChar = splitChar;
     }
 

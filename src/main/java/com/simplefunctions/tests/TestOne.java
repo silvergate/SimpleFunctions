@@ -22,6 +22,10 @@ public class TestOne {
         tr.runTest(new SplitStringLimit());
         tr.runTest(new SplitAndAddString());
         tr.runTest(new IfIntGtTest());
+        tr.runTest(new IntFilterTest());
+        tr.runTest(new IntFilterTest2());
+        tr.runTest(new SplitStrTrimFilterLen());
+        tr.runTest(new SplitFilterLenInfer());
 
     }
 }

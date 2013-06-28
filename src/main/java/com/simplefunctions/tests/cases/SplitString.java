@@ -2,7 +2,7 @@ package com.simplefunctions.tests.cases;
 
 import com.simplefunctions.base.IFunction;
 import com.simplefunctions.functions.literals.FunString;
-import com.simplefunctions.functions.string.FunStringSplit;
+import com.simplefunctions.functions.string.FunStrSplit;
 import com.simplefunctions.tests.TestCase;
 
 import java.io.UnsupportedEncodingException;
@@ -25,7 +25,7 @@ public class SplitString extends TestCase {
 
     @Override
     public IFunction createFunction() {
-        return FunStringSplit.c(SPLIT_CHAR, FunString.c(STR1));
+        return FunStrSplit.c(SPLIT_CHAR, FunString.c(STR1));
     }
 
     @Override

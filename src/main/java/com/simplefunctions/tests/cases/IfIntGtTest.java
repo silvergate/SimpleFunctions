@@ -1,7 +1,7 @@
 package com.simplefunctions.tests.cases;
 
 import com.simplefunctions.base.IFunction;
-import com.simplefunctions.functions.integer.FunIntTest;
+import com.simplefunctions.functions.integer.FunIntCmp;
 import com.simplefunctions.functions.literals.FunInt;
 import com.simplefunctions.functions.literals.FunString;
 import com.simplefunctions.functions.string.FunStrConcat;
@@ -28,11 +28,10 @@ public class IfIntGtTest extends TestCase {
     @Override
     public IFunction createFunction() {
         IFunction equalTrue =
-                FunIf.c(FunIntTest.eq(FunInt.c(233), FunInt.c(233)), FunString.c(T1_TRUE),
+                FunIf.c(FunIntCmp.eq(FunInt.c(233), FunInt.c(233)), FunString.c(T1_TRUE),
                         FunString.c(T1_FALSE));
-        IFunction leFalse =
-                FunIf.c(FunIntTest.le(FunInt.c(2323), FunInt.c(3)), FunString.c(T2_TRUE),
-                        FunString.c(T2_FALSE));
+        IFunction leFalse = FunIf.c(FunIntCmp.le(FunInt.c(2323), FunInt.c(3)), FunString.c(T2_TRUE),
+                FunString.c(T2_FALSE));
         return FunStrConcat.c(equalTrue, leFalse);
     }
 

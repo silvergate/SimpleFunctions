@@ -10,7 +10,7 @@ import com.simplefunctions.base.IFunction;
 public abstract class TestCase {
     public abstract String getCaseName();
 
-    public abstract IFunction createFunction();
+    public abstract IFunction createFunction() throws Exception;
 
     public abstract Object asJava() throws Exception;
 }

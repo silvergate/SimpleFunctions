@@ -25,14 +25,31 @@ public class FunCollection implements IFunctionType {
                 FunVoid.FUN);
     }
 
-    public static IFunction list(boolean ordered, boolean unique, IDataType elementType,
-            IFunction... functions) {
-        return new Function(new FunCollection(true, false, elementType, functions), FunVoid.FUN);
+    private static IDataType inferDataType(IFunction... functions)
+            throws InvalidDataTypeException, ComplexityOverflowException {
+        IDataType currentType = null;
+        for (final IFunction function : functions) {
+            final FunctionMetrics metrics = function.calcMetrics();
+            final IDataType type = metrics.getOutputType();
+            if (currentType == null) {
+                currentType = type;
+            } else {
+                currentType = currentType.combine(type);
+            }
+        }
+        return currentType;
     }
 
-    public static IFunction unique(boolean ordered, boolean unique, IDataType elementType,
-            IFunction... functions) {
-        return new Function(new FunCollection(false, true, elementType, functions), FunVoid.FUN);
+    public static IFunction list(IFunction... functions)
+            throws InvalidDataTypeException, ComplexityOverflowException {
+        return new Function(new FunCollection(true, false, inferDataType(functions), functions),
+                FunVoid.FUN);
+    }
+
+    public static IFunction unique(IFunction... functions)
+            throws InvalidDataTypeException, ComplexityOverflowException {
+        return new Function(new FunCollection(false, true, inferDataType(functions), functions),
+                FunVoid.FUN);
     }
 
     private FunCollection(boolean ordered, boolean unique, IDataType elementType,

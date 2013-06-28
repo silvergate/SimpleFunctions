@@ -1,5 +1,7 @@
 package com.simplefunctions.dataTypes;
 
+import com.simplefunctions.base.IDataType;
+
 /**
  * Buran.
  *
@@ -9,9 +11,6 @@ public class BitType extends DataType {
     private final int maxBits;
     private final int minBits;
     private final boolean byteAligned;
-
-    @Deprecated
-    public static final int MAX_NUM_OF_BITS = Integer.MAX_VALUE;
 
     public BitType(int minBits, int maxBits, boolean byteAligned) {
         this.byteAligned = byteAligned;
@@ -77,5 +76,17 @@ public class BitType extends DataType {
                 "maxBits=" + maxBits +
                 ", minBits=" + minBits +
                 '}';
+    }
+
+    @Override
+    protected IDataType combineSameType(IDataType type) {
+        final BitType other = (BitType) type;
+        if (other.isByteAligned() == this.isByteAligned()) {
+            /* Combine only if bit-aligned */
+            return new BitType(Math.min(other.getMinBits(), getMinBits()),
+                    Math.max(other.getMaxBits(), getMaxBits()), isByteAligned());
+        } else {
+            return AltType.combine(this, other);
+        }
     }
 }

@@ -1,5 +1,7 @@
 package com.simplefunctions.dataTypes;
 
+import com.simplefunctions.base.IDataType;
+
 /**
  * Buran.
  *
@@ -61,5 +63,12 @@ public class StringType extends DataType {
                 "maxLen=" + maxLen +
                 ", minLen=" + minLen +
                 '}';
+    }
+
+    @Override
+    protected IDataType combineSameType(IDataType type) {
+        final StringType cast = (StringType) type;
+        return new StringType(Math.min(getMinLen(), cast.getMinLen()),
+                Math.max(getMaxLen(), cast.getMaxLen()));
     }
 }

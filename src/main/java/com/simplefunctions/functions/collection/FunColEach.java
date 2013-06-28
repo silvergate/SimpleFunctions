@@ -2,10 +2,11 @@ package com.simplefunctions.functions.collection;
 
 import com.simplefunctions.base.*;
 import com.simplefunctions.dataTypes.CollectionType;
-import com.simplefunctions.dataTypes.FilterMark;
+import com.simplefunctions.dataTypes.FunctionTypeType;
 import com.simplefunctions.functions.base.EvalMethod;
 import com.simplefunctions.functions.base.FunctionTypeBase;
 import com.simplefunctions.functions.base.MetricsMethod;
+import com.simplefunctions.functions.literals.FunList;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,31 +19,26 @@ import java.util.HashSet;
  */
 public class FunColEach extends FunctionTypeBase {
 
-    private final IFunctionType functionType;
     private final boolean uniqueResults;
 
-    private FunColEach(IFunctionType functionType, boolean uniqueResults) {
-        this.functionType = functionType;
+    private FunColEach(boolean uniqueResults) {
         this.uniqueResults = uniqueResults;
     }
 
-    public static IFunction c(IFunctionType functionType, IFunction collection) {
-        return new Function(new FunColEach(functionType, false), collection);
+    public static IFunction c(IFunction collection, IFunction transform) {
+        return new Function(new FunColEach(false), FunList.c(transform, collection));
     }
 
-    public static IFunction unique(IFunctionType functionType, IFunction collection) {
-        return new Function(new FunColEach(functionType, true), collection);
+    public static IFunction unique(IFunction collection, IFunction transform) {
+        return new Function(new FunColEach(true), FunList.c(transform, collection));
     }
 
     @MetricsMethod
-    public FunctionMetrics metrics(CollectionType col)
+    public FunctionMetrics metrics(FunctionTypeType ftt, CollectionType col)
             throws InvalidDataTypeException, ComplexityOverflowException {
         final IDataType element = col.getElementType();
-        final FunctionMetrics singleMetrics = this.functionType.calcMetrics(element);
+        final FunctionMetrics singleMetrics = ftt.getValue().calcMetrics(element);
         final Complexity singleComplexity = singleMetrics.getComplexity();
-
-        //TODO: Berücksichtigen von FilterMark (falls das vorhanden ist,
-        //ändern sich max und min elements).
 
         final Complexity combinedComplexity = singleComplexity.multiply(col.getMaxElements());
         final CollectionType finalCollectionType =
@@ -52,7 +48,7 @@ public class FunColEach extends FunctionTypeBase {
     }
 
     @EvalMethod
-    public Object run(Collection<?> inCol) {
+    public Object run(IFunctionType functionType, Collection<?> inCol) {
         Collection<Object> result;
         if (this.uniqueResults) {
             result = new HashSet<>();
@@ -60,16 +56,14 @@ public class FunColEach extends FunctionTypeBase {
             result = new ArrayList<>();
         }
         for (final Object element : inCol) {
-            if (!FilterMark.SINGLETON.equals(element)) {
-                final Object elemResult = this.functionType.eval(new IEvaluable() {
-                    @Override
-                    public Object eval() {
-                        return element;
-                    }
+            final Object elemResult = functionType.eval(new IEvaluable() {
+                @Override
+                public Object eval() {
+                    return element;
+                }
 
-                });
-                result.add(elemResult);
-            }
+            });
+            result.add(elemResult);
         }
         return result;
     }

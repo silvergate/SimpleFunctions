@@ -7,4 +7,6 @@ package com.simplefunctions.base;
  */
 public interface IDataType {
     boolean isValid(Object data);
+
+    IDataType combine(IDataType type);
 }
